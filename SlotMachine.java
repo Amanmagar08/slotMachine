@@ -1,4 +1,3 @@
-import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -27,6 +26,8 @@ public class SlotMachine {
             System.out.println("\n\nYour balance is: $" + balance);
             System.out.print("Enter the bet amount: ");
             bet = scanner.nextInt();
+
+            // If invalid bet amount is received
             if (bet > balance) {
                 System.out.println("You cannot bet more than your balance.");
                 continue;
@@ -36,22 +37,24 @@ public class SlotMachine {
                 continue;
             }
 
-
+            // Generate random output
+            System.out.println("Spinning...");
             String[] output = spin(symbols);
             System.out.println(String.join(" | ", output));
 
+            // Calculate payout and print the result accordingly
             payout = payOut(output, bet);
             balance += payout;
-
-
             System.out.println((payout > 0) ? "You won: $" + payout: "You lost: $" + bet );
 
 
+            // If balance is already 0 donot continue further
             if (balance == 0){
                 System.out.println("You ran out of money.");
                 break;
             }
 
+            // Prompt the user asking if they want to continue playing
             System.out.println("Do you want to keep playing: ");
             System.out.print("no to stop playing: ");
             keepPlaying = scanner.next().toLowerCase();
